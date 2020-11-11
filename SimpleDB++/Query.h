@@ -31,12 +31,19 @@
 #include <sqlite3.h>
 
 #include <string>
+#include <exception>
 
 using namespace std;
 
 namespace sdb {
 
 class Query {
+public:
+	class QueryError : public std::runtime_error {
+	public:
+		QueryError(const char * msg)
+			: std::runtime_error(msg) {}
+	};
 public:
 	/**
 	 * @param value the sql query text e.g. "SELECT * FROM MyTable"

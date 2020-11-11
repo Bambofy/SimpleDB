@@ -56,6 +56,10 @@ void sdb::Query::Execute(sdb::Database & target, function<void(sdb::Row)> succes
 		return 0;
 	}, &success, &errMsg);
 
+	if (errMsg != nullptr) {
+		throw QueryError(errMsg);
+	}
+
 	target.Close();
 }
 
